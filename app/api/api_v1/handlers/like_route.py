@@ -9,7 +9,7 @@ from uuid import UUID
 like_router = APIRouter(tags=["like"])
 
 
-@like_router.post("/post/like/{post_id}")
+@like_router.post("/post/like/{post_id}", name=f"like or dislike a post")
 async def like_post(
     post_id: UUID, current_user: Users = Depends(UserService.get_current_user)
 ):
