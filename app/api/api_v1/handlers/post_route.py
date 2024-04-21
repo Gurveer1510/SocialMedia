@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status, File, UploadFile
 from app.schemas.post_schema import Post_Schema
-# from app.schemas.user_schema import FollowSchema
+from app.schemas.user_schema import FollowSchema
 from app.models.posts_model import Post
 from app.services.user_service import UserService
 from secrets import token_hex
@@ -55,4 +55,27 @@ async def get_all_posts(username : str, current_user = Depends(UserService.get_c
     return {
         "data": posts
     }
+
+@post_router.delete("/post/remove/{post_id}")
+async def remove_post(post_id : UUID, current_user : FollowSchema = Depends(UserService.get_current_user)):
+
+    try:
+
+        post = await Post.find_one(Post.post_id == post_id)
+        post_dump = post.model_dump()
+        print(post_dump.get('owner')['username'])
+        print(current_user.username)
+        if post:
+
+            if post_dump.get('owner')['username'] == current_user.username : 
+                await post.delete()
+                return{
+                    'status' : status.HTTP_204_NO_CONTENT
+                }
+        
+            else: 
+                return HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"not the owner of this post")
+
+    except:
+        return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"no post found with {post_id} post id")
 

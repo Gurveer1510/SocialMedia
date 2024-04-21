@@ -23,6 +23,8 @@ async def login_user( response : Response, formData: OAuth2PasswordRequestForm =
         )
     
     data = create_token({"username": user.username, "email": user.email})
+    
+    
     response.set_cookie(key='token_data', value=data)
     return data
 
