@@ -11,7 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from app.core.config import settings
 
 
-app = FastAPI()
+app = FastAPI(title='SocialMedia service')
 
 
 origins = [
