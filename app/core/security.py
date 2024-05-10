@@ -1,4 +1,4 @@
-from passlib.hash import bcrypt
+import bcrypt
 from fastapi import Response
 from app.core.config import settings
 from jose import jwt, JWTError
