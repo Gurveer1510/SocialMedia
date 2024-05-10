@@ -24,9 +24,9 @@ async def login_user( response : Response, formData: OAuth2PasswordRequestForm =
     
     data = create_token({"username": user.username, "email": user.email})
     
-    response.set_cookie(key='token_data', value=data, httponly=True)
+    # response.set_cookie(key='token_data', value=data, httponly=True)
     
-    # return data
+    return data
 
 @auth_router.post("/refresh_token")
 async def refresh_token(response : Response, refresh_token : str = Header(convert_underscores=False)):
@@ -39,12 +39,10 @@ async def refresh_token(response : Response, refresh_token : str = Header(conver
             'access_token' : token['access_token'],
             'refresh_token' : refresh_token
         }
-        response.delete_cookie(key='token_data')
-        response.set_cookie(key='token_data', value=cookie)
+        # response.delete_cookie(key='token_data')
+        # response.set_cookie(key='token_data', value=cookie)
 
-        return {
-            'data' : cookie
-        }
+        return cookie
 
     except JWTError:
         raise credential_exception
