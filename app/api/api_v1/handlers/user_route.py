@@ -52,7 +52,7 @@ async def upload_profile_image(file : UploadFile = File(...), current_user = Dep
 
     file.close()
 
-    await Users.find_one(Users.username == current_user.username).set({Users.profile_pic : f"http://localhost:8000/{generated_name}"})
+    await Users.find_one(Users.username == current_user.username).set({Users.profile_pic : f"https://socialmedia-backend-2-nb8h.onrender.com/{generated_name}"})
 
     posts_from_current_user =  Post.find({"owner.username" : current_user.username})
     

@@ -35,7 +35,7 @@ async def create_post(caption : str, file : UploadFile = File(...), current_user
 
     file.close()
     
-    post = Post(caption=caption, owner=current_user, post_image=f'http://localhost:8000/{generated_name}')
+    post = Post(caption=caption, owner=current_user, post_image=f'https://socialmedia-backend-2-nb8h.onrender.com/{generated_name}')
 
     await post.insert()
 
