@@ -61,7 +61,7 @@ async def upload_profile_image(file : UploadFile = File(...), current_user = Dep
     myList = await posts_from_current_user.to_list()
    
     for post in myList:
-        post.owner.profile_pic =  f"http://localhost:8000/{generated_name}"
+        post.owner.profile_pic =  f"https://socialmedia-backend-2-nb8h.onrender.com/{generated_name}"
         await post.replace()
 
 
