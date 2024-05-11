@@ -66,7 +66,7 @@ async def upload_profile_image(file : UploadFile = File(...), current_user = Dep
 
 
     return {
-        "profile_image" : f"http://localhost:8000/{generated_name}"
+        "profile_image" : f"https://socialmedia-backend-2-nb8h.onrender.com/{generated_name}"
     }
 
 
